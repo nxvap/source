@@ -1,3 +1,5 @@
+local success1, hui = pcall(gethui or get_hidden_ui or get_hui or gethiddenui or gethiddengui or get_hidden_gui)
+local success2, hui = pcall(game.GetService, game, "CoreGui")
 local main = Instance.new("ScreenGui")
 local frame = Instance.new("Frame")
 local name = Instance.new("TextLabel")
@@ -10,410 +12,426 @@ local flybtn = Instance.new("TextButton")
 local closebtn = Instance.new("TextButton")
 local mini = Instance.new("TextButton")
 local mini2 = Instance.new("TextButton")
-
-local plr = game.Players.LocalPlayer
-local chr = plr.Character
-local hmn = chr.Humanoid
+local plr = game:GetService("Players").LocalPlayer;
+local chr = plr.Character;
+local hmn = chr.Humanoid;
 local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
 local RunService = game:GetService("RunService")
-pcall(function() plr:WaitForChild("PlayerGui"):FindFirstChild("flygui"):Destroy() end)
-
-main.Name = "flygui"
-main.Parent = plr:WaitForChild("PlayerGui")
-main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-main.ResetOnSpawn = false
-
-frame.Parent = main
+main.Name = "FlyGui"
+main.Parent = (hui or coreGui or plr:WaitForChild("PlayerGui"))
+main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
+main.ResetOnSpawn = false;
+frame.Parent = main;
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 frame.BorderColor3 = Color3.fromRGB(30, 30, 30)
 frame.Position = UDim2.new(0.1, 0, 0.1, 0)
 frame.Size = UDim2.new(0, 189, 0, 54)
-
 name.Name = "name"
-name.Parent = frame
-name.BackgroundColor3 = Color3.fromRGB(46,49,54)
+name.Parent = frame;
+name.BackgroundColor3 = Color3.fromRGB(46, 49, 54)
 name.Position = UDim2.new(0.475, 0, 0, 0)
 name.Size = UDim2.new(0, 100, 0, 27)
 name.Font = "SourceSans"
 name.Text = "FLY GUI"
-name.TextColor3 = Color3.fromRGB(202,178,251)
-name.TextSize = 25
-name.TextWrapped = true
-
+name.TextColor3 = Color3.fromRGB(202, 178, 251)
+name.TextSize = 25;
+name.TextWrapped = true;
 up.Name = "up"
-up.Parent = frame
-up.BackgroundColor3 = Color3.fromRGB(74,76,81)
+up.Parent = frame;
+up.BackgroundColor3 = Color3.fromRGB(74, 76, 81)
 up.Size = UDim2.new(0, 44, 0, 27)
 up.Font = "SourceSans"
 up.Text = "↑"
-up.TextColor3 = Color3.fromRGB(202,178,251)
-up.TextSize = 14
-
+up.TextColor3 = Color3.fromRGB(202, 178, 251)
+up.TextSize = 14;
 down.Name = "down"
-down.Parent = frame
-down.BackgroundColor3 = Color3.fromRGB(74,76,81)
+down.Parent = frame;
+down.BackgroundColor3 = Color3.fromRGB(74, 76, 81)
 down.Position = UDim2.new(0, 0, 0.52, 0)
 down.Size = UDim2.new(0, 44, 0, 27)
 down.Font = "SourceSans"
 down.Text = "↓"
-down.TextColor3 = Color3.fromRGB(202,178,251)
-down.TextSize = 14
-
+down.TextColor3 = Color3.fromRGB(202, 178, 251)
+down.TextSize = 14;
 plus.Name = "plus"
-plus.Parent = frame
-plus.BackgroundColor3 = Color3.fromRGB(54,57,62)
+plus.Parent = frame;
+plus.BackgroundColor3 = Color3.fromRGB(54, 57, 62)
 plus.Position = UDim2.new(0.236, 0, 0, 0)
 plus.Size = UDim2.new(0, 44, 0, 27)
 plus.Font = "SourceSans"
 plus.Text = "+"
-plus.TextColor3 = Color3.fromRGB(202,178,251)
-plus.TextSize = 25
-plus.TextWrapped = true
-
+plus.TextColor3 = Color3.fromRGB(202, 178, 251)
+plus.TextSize = 25;
+plus.TextWrapped = true;
 mine.Name = "mine"
-mine.Parent = frame
-mine.BackgroundColor3 = Color3.fromRGB(54,57,62)
+mine.Parent = frame;
+mine.BackgroundColor3 = Color3.fromRGB(54, 57, 62)
 mine.Position = UDim2.new(0.24, 0, 0.516, 0)
 mine.Size = UDim2.new(0, 44, 0, 27)
 mine.Font = "SourceSans"
 mine.Text = "-"
-mine.TextColor3 = Color3.fromRGB(202,178,251)
-mine.TextSize = 25
-mine.TextWrapped = true
-
+mine.TextColor3 = Color3.fromRGB(202, 178, 251)
+mine.TextSize = 25;
+mine.TextWrapped = true;
 speed.Name = "speed"
-speed.Parent = frame
-speed.BackgroundColor3 = Color3.fromRGB(74,76,81)
+speed.Parent = frame;
+speed.BackgroundColor3 = Color3.fromRGB(74, 76, 81)
 speed.Position = UDim2.new(0.48, 0, 0.52, 0)
 speed.Size = UDim2.new(0, 44, 0, 27)
 speed.Font = "SourceSans"
 speed.Text = "1"
-speed.TextColor3 = Color3.fromRGB(202,178,251)
-speed.TextScaled = true
-speed.TextSize = 14
-speed.TextWrapped = true
-
+speed.TextColor3 = Color3.fromRGB(202, 178, 251)
+speed.TextScaled = true;
+speed.TextSize = 14;
+speed.TextWrapped = true;
 flybtn.Name = "fly"
-flybtn.Parent = frame
-flybtn.BackgroundColor3 = Color3.fromRGB(74,76,81)
+flybtn.Parent = frame;
+flybtn.BackgroundColor3 = Color3.fromRGB(74, 76, 81)
 flybtn.Position = UDim2.new(0.72, 0, 0.52, 0)
 flybtn.Size = UDim2.new(0, 54, 0, 27)
 flybtn.Font = "SourceSans"
 flybtn.Text = "FLY"
-flybtn.TextColor3 = Color3.fromRGB(202,178,251)
-flybtn.TextSize = 14
-
+flybtn.TextColor3 = Color3.fromRGB(202, 178, 251)
+flybtn.TextSize = 14;
 closebtn.Name = "close"
-closebtn.Parent = main.Frame
-closebtn.BackgroundColor3 = Color3.fromRGB(54,57,62)
+closebtn.Parent = main.Frame;
+closebtn.BackgroundColor3 = Color3.fromRGB(54, 57, 62)
 closebtn.Font = "SourceSans"
 closebtn.Size = UDim2.new(0, 44, 0, 27)
 closebtn.Text = "x"
-closebtn.TextColor3 = Color3.fromRGB(202,178,251)
-closebtn.TextSize = 25
-closebtn.Position =  UDim2.new(0, 0, -1, 27)
-
+closebtn.TextColor3 = Color3.fromRGB(202, 178, 251)
+closebtn.TextSize = 25;
+closebtn.Position = UDim2.new(0, 0, -1, 27)
 mini.Name = "minimize"
-mini.Parent = main.Frame
-mini.BackgroundColor3 = Color3.fromRGB(46,49,54)
+mini.Parent = main.Frame;
+mini.BackgroundColor3 = Color3.fromRGB(46, 49, 54)
 mini.Font = "SourceSans"
 mini.Size = UDim2.new(0, 44, 0, 27)
 mini.Text = "-"
-mini.TextColor3 = Color3.fromRGB(202,178,251)
-mini.TextSize = 35
+mini.TextColor3 = Color3.fromRGB(202, 178, 251)
+mini.TextSize = 35;
 mini.Position = UDim2.new(0, 44, -1, 27)
-
 mini2.Name = "minimize2"
-mini2.Parent = main.Frame
-mini2.BackgroundColor3 = Color3.fromRGB(46,49,54)
+mini2.Parent = main.Frame;
+mini2.BackgroundColor3 = Color3.fromRGB(46, 49, 54)
 mini2.Font = "SourceSans"
 mini2.Size = UDim2.new(0, 44, 0, 27)
 mini2.Text = "+"
-mini2.TextColor3 = Color3.fromRGB(202,178,251)
-mini2.TextSize = 30
+mini2.TextColor3 = Color3.fromRGB(202, 178, 251)
+mini2.TextSize = 30;
 mini2.Position = UDim2.new(0, 44, -1, 54)
-mini2.Visible = false
-
-speeds = 1
-fly = false
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "Notify",
-    Text = "Follow me for more scripts: @Roun95",
-    Icon = game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("Roun95"), Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420),
-    Duration = 10
-})
-frame.Active = true
-frame.Draggable = true
-flybtn.MouseButton1Down:connect(function()
-    if fly == true then
-        fly = false
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Running,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
-        hmn:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
-    else 
-        fly = true
-        for i = 1, speeds do
-            spawn(function()
-                local rs = RunService.Heartbeat
-                tpwalking = true
-                while tpwalking and rs:Wait() and chr and hum and hum.Parent do
-                    if hum.MoveDirection.Magnitude > 0 then
-                        chr:TranslateBy(hum.MoveDirection)
-                    end
-                end
-            end)
-        end
-        chr.Animate.Disabled = true
-        local Hum = chr:FindFirstChildOfClass("Humanoid") or chr:FindFirstChildOfClass("AnimationController")
-        for i,v in next, Hum:GetPlayingAnimationTracks() do
-            v:AdjustSpeed(0)
-        end
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Running,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
-        hmn:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
-        hmn:ChangeState(Enum.HumanoidStateType.Swimming)
-    end
-    if chr:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
-        local torso = chr.Torso
-        local flying = true
-        local deb = true
-        local ctrl = {f = 0, b = 0, l = 0, r = 0}
-        local lastctrl = {f = 0, b = 0, l = 0, r = 0}
-        local maxspeed = 50
-        local speed = 0
-        local bg = Instance.new("BodyGyro", torso)
-        bg.P = 9e4
-        bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-        bg.cframe = torso.CFrame
-        local bv = Instance.new("BodyVelocity", torso)
-        bv.velocity = Vector3.new(0,0.1,0)
-        bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
-        if fly == true then
-            hmn.PlatformStand = true
-        end
-
-        while fly == true or hmn.Health == 0 do
-            RunService.RenderStepped:Wait()
-            if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
-                speed = speed+.5+(speed/maxspeed)
-                if speed > maxspeed then
-                    speed = maxspeed
-                end
-            elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
-                speed = speed-1
-                if speed < 0 then
-                    speed = 0
-                end
-            end
-            if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
-                bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-                lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
-            elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
-                bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-            else
-                bv.velocity = Vector3.new(0,0,0)
-            end
-            --    game.Players.LocalPlayer.Character.Animate.Disabled = true
-            bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
-        end
-        ctrl = {f = 0, b = 0, l = 0, r = 0}
-        lastctrl = {f = 0, b = 0, l = 0, r = 0}
-        speed = 0
-        bg:Destroy()
-        bv:Destroy()
-        hmn.PlatformStand = false
-        chr.Animate.Disabled = false
-        tpwalking = false
-    else
-        local UpperTorso = chr.UpperTorso
-        local flying = true
-        local deb = true
-        local ctrl = {f = 0, b = 0, l = 0, r = 0}
-        local lastctrl = {f = 0, b = 0, l = 0, r = 0}
-        local maxspeed = 50
-        local speed = 0
-        local bg = Instance.new("BodyGyro", UpperTorso)
-        bg.P = 9e4
-        bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-        bg.cframe = UpperTorso.CFrame
-        local bv = Instance.new("BodyVelocity", UpperTorso)
-        bv.velocity = Vector3.new(0,0.1,0)
-        bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
-        if fly == true then
-            hmn.PlatformStand = true
-        end
-        while fly == true or hmn.Health == 0 do
-            wait()
-            if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
-                speed = speed+.5+(speed/maxspeed)
-                if speed > maxspeed then
-                    speed = maxspeed
-                end
-            elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
-                speed = speed-1
-                if speed < 0 then
-                    speed = 0
-                end
-            end
-            if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
-                bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-                lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
-            elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
-                bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-            else
-                bv.velocity = Vector3.new(0,0,0)
-            end
-
-            bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
-        end
-        ctrl = {f = 0, b = 0, l = 0, r = 0}
-        lastctrl = {f = 0, b = 0, l = 0, r = 0}
-        speed = 0
-        bg:Destroy()
-        bv:Destroy()
-        hmn.PlatformStand = false
-        chr.Animate.Disabled = false
-        tpwalking = false
-    end
+mini2.Visible = false;
+speeds = 1;
+fly = false;
+frame.Active = true;
+frame.Draggable = true;
+flybtn.MouseButton1Down:Connect(function()
+	if fly == true then
+		fly = false;
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Climbing, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.FallingDown, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Flying, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Freefall, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.GettingUp, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Jumping, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Landed, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Physics, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Running, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics, true)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Swimming, true)
+		hmn:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
+	else
+		fly = true;
+		for i = 1, speeds do
+			task.spawn(function()
+				local rs = RunService.Heartbeat;
+				tpwalking = true;
+				while tpwalking and rs:Wait() and chr and hum and hum.Parent do
+					if hum.MoveDirection.Magnitude > 0 then
+						chr:TranslateBy(hum.MoveDirection)
+					end
+				end
+			end)
+		end;
+		chr.Animate.Disabled = true;
+		local Hum = chr:FindFirstChildOfClass("Humanoid") or chr:FindFirstChildOfClass("AnimationController")
+		for i, v in next, Hum:GetPlayingAnimationTracks() do
+			v:AdjustSpeed(0)
+		end;
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Climbing, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Flying, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Freefall, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.GettingUp, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Jumping, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Landed, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Physics, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Running, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics, false)
+		hmn:SetStateEnabled(Enum.HumanoidStateType.Swimming, false)
+		hmn:ChangeState(Enum.HumanoidStateType.Swimming)
+	end;
+	if chr:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+		local torso = chr.Torso;
+		local flying = true;
+		local deb = true;
+		local ctrl = {
+			f = 0,
+			b = 0,
+			l = 0,
+			r = 0
+		}
+		local lastctrl = {
+			f = 0,
+			b = 0,
+			l = 0,
+			r = 0
+		}
+		local maxspeed = 50;
+		local speed = 0;
+		local bg = Instance.new("BodyGyro", torso)
+		bg.P = 6561;
+		bg.maxTorque = Vector3.new(387420489, 387420489, 387420489)
+		bg.cframe = torso.CFrame;
+		local bv = Instance.new("BodyVelocity", torso)
+		bv.velocity = Vector3.new(0, 0.1, 0)
+		bv.maxForce = Vector3.new(387420489, 387420489, 387420489)
+		if fly == true then
+			hmn.PlatformStand = true
+		end;
+		while fly == true or hmn.Health == 0 do
+			RunService.RenderStepped:Wait()
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed + .5 + (speed / maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not(ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed - 1;
+				if speed < 0 then
+					speed = 0
+				end
+			end;
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game:GetService("Workspace").CurrentCamera.CoordinateFrame.lookVector * (ctrl.f + ctrl.b)) + ((game:GetService("Workspace").CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l + ctrl.r, (ctrl.f + ctrl.b) * .2, 0).p) - game:GetService("Workspace").CurrentCamera.CoordinateFrame.p)) * speed;
+				lastctrl = {
+					f = ctrl.f,
+					b = ctrl.b,
+					l = ctrl.l,
+					r = ctrl.r
+				}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game:GetService("Workspace").CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f + lastctrl.b)) + ((game:GetService("Workspace").CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l + lastctrl.r, (lastctrl.f + lastctrl.b) * .2, 0).p) - game:GetService("Workspace").CurrentCamera.CoordinateFrame.p)) * speed
+			else
+				bv.velocity = Vector3.new(0, 0, 0)
+			end;
+			bg.cframe = game:GetService("Workspace").CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f + ctrl.b) * 50 * speed / maxspeed), 0, 0)
+		end;
+		ctrl = {
+			f = 0,
+			b = 0,
+			l = 0,
+			r = 0
+		}
+		lastctrl = {
+			f = 0,
+			b = 0,
+			l = 0,
+			r = 0
+		}
+		speed = 0;
+		bg:Destroy()
+		bv:Destroy()
+		hmn.PlatformStand = false;
+		chr.Animate.Disabled = false;
+		tpwalking = false
+	else
+		local UpperTorso = chr.UpperTorso;
+		local flying = true;
+		local deb = true;
+		local ctrl = {
+			f = 0,
+			b = 0,
+			l = 0,
+			r = 0
+		}
+		local lastctrl = {
+			f = 0,
+			b = 0,
+			l = 0,
+			r = 0
+		}
+		local maxspeed = 50;
+		local speed = 0;
+		local bg = Instance.new("BodyGyro", UpperTorso)
+		bg.P = 6561;
+		bg.maxTorque = Vector3.new(387420489, 387420489, 387420489)
+		bg.cframe = UpperTorso.CFrame;
+		local bv = Instance.new("BodyVelocity", UpperTorso)
+		bv.velocity = Vector3.new(0, 0.1, 0)
+		bv.maxForce = Vector3.new(387420489, 387420489, 387420489)
+		if fly == true then
+			hmn.PlatformStand = true
+		end;
+		while fly == true or hmn.Health == 0 do
+			task.wait()
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed + .5 + (speed / maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not(ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed - 1;
+				if speed < 0 then
+					speed = 0
+				end
+			end;
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game:GetService("Workspace").CurrentCamera.CoordinateFrame.lookVector * (ctrl.f + ctrl.b)) + ((game:GetService("Workspace").CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l + ctrl.r, (ctrl.f + ctrl.b) * .2, 0).p) - game:GetService("Workspace").CurrentCamera.CoordinateFrame.p)) * speed;
+				lastctrl = {
+					f = ctrl.f,
+					b = ctrl.b,
+					l = ctrl.l,
+					r = ctrl.r
+				}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game:GetService("Workspace").CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f + lastctrl.b)) + ((game:GetService("Workspace").CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l + lastctrl.r, (lastctrl.f + lastctrl.b) * .2, 0).p) - game:GetService("Workspace").CurrentCamera.CoordinateFrame.p)) * speed
+			else
+				bv.velocity = Vector3.new(0, 0, 0)
+			end;
+			bg.cframe = game:GetService("Workspace").CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f + ctrl.b) * 50 * speed / maxspeed), 0, 0)
+		end;
+		ctrl = {
+			f = 0,
+			b = 0,
+			l = 0,
+			r = 0
+		}
+		lastctrl = {
+			f = 0,
+			b = 0,
+			l = 0,
+			r = 0
+		}
+		speed = 0;
+		bg:Destroy()
+		bv:Destroy()
+		hmn.PlatformStand = false;
+		chr.Animate.Disabled = false;
+		tpwalking = false
+	end
 end)
-
-local tis
-up.MouseButton1Down:connect(function()
-    tis = up.MouseEnter:connect(function()
-        while tis do
-            wait()
-            chr.HumanoidRootPart.CFrame = chr.HumanoidRootPart.CFrame * CFrame.new(0,1,0)
-        end
-    end)
+local tis;
+up.MouseButton1Down:Connect(function()
+	tis = up.MouseEnter:Connect(function()
+		while tis do
+			task.wait()
+			chr.HumanoidRootPart.CFrame = chr.HumanoidRootPart.CFrame * CFrame.new(0, 1, 0)
+		end
+	end)
 end)
-
-up.MouseLeave:connect(function()
-    if tis then
-        tis:Disconnect()
-        tis = nil
-    end
+up.MouseLeave:Connect(function()
+	if tis then
+		tis:Disconnect()
+		tis = nil
+	end
 end)
-
-local dis
-down.MouseButton1Down:connect(function()
-    dis = down.MouseEnter:connect(function()
-        while dis do
-            wait()
-            chr.HumanoidRootPart.CFrame = chr.HumanoidRootPart.CFrame * CFrame.new(0,-1,0)
-        end
-    end)
+local dis;
+down.MouseButton1Down:Connect(function()
+	dis = down.MouseEnter:Connect(function()
+		while dis do
+			task.wait()
+			chr.HumanoidRootPart.CFrame = chr.HumanoidRootPart.CFrame * CFrame.new(0, -1, 0)
+		end
+	end)
 end)
-
-down.MouseLeave:connect(function()
-    if dis then
-        dis:Disconnect()
-        dis = nil
-    end
+down.MouseLeave:Connect(function()
+	if dis then
+		dis:Disconnect()
+		dis = nil
+	end
 end)
-
 plr.CharacterAdded:Connect(function(char)
-    wait(0.7)
-    hmn.PlatformStand = false
-    chr.Animate.Disabled = false
+	task.wait(1)
+	hmn.PlatformStand = false;
+	chr.Animate.Disabled = false
 end)
-
-plus.MouseButton1Down:connect(function()
-    speeds = speeds + 1
-    speed.Text = speeds
-    if fly == true then
-        tpwalking = false
-        for i = 1, speeds do
-            spawn(function()
-                local rs = RunService.Heartbeat
-                tpwalking = true
-                local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-                while tpwalking and rs:Wait() and chr and hum and hum.Parent do
-                    if hum.MoveDirection.Magnitude > 0 then
-                        chr:TranslateBy(hum.MoveDirection)
-                    end
-                end
-            end)
-        end
-    end
+plus.MouseButton1Down:Connect(function()
+	speeds = speeds + 1;
+	speed.Text = speeds;
+	if fly == true then
+		tpwalking = false;
+		for i = 1, speeds do
+			task.spawn(function()
+				local rs = RunService.Heartbeat;
+				tpwalking = true;
+				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+				while tpwalking and rs:Wait() and chr and hum and hum.Parent do
+					if hum.MoveDirection.Magnitude > 0 then
+						chr:TranslateBy(hum.MoveDirection)
+					end
+				end
+			end)
+		end
+	end
 end)
-
-mine.MouseButton1Down:connect(function()
-    if speeds == 1 then
-        speed.Text = 'cannot be less than 1'
-        wait(1)
-        speed.Text = speeds
-    else
-        speeds = speeds - 1
-        speed.Text = speeds
-        if fly == true then
-            tpwalking = false
-            for i = 1, speeds do
-                spawn(function()
-                    local rs = RunService.Heartbeat
-                    tpwalking = true
-                    local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-                    while tpwalking and rs:Wait() and chr and hum and hum.Parent do
-                        if hum.MoveDirection.Magnitude > 0 then
-                            chr:TranslateBy(hum.MoveDirection)
-                        end
-                    end
-                end)
-            end
-        end
-    end
+mine.MouseButton1Down:Connect(function()
+	if speeds == 1 then
+		speed.Text = "Cannot be less than 1!"
+		task.wait(1)
+		speed.Text = speeds
+	else
+		speeds = speeds - 1;
+		speed.Text = speeds;
+		if fly == true then
+			tpwalking = false;
+			for i = 1, speeds do
+				task.spawn(function()
+					local rs = RunService.Heartbeat;
+					tpwalking = true;
+					local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+					while tpwalking and rs:Wait() and chr and hum and hum.Parent do
+						if hum.MoveDirection.Magnitude > 0 then
+							chr:TranslateBy(hum.MoveDirection)
+						end
+					end
+				end)
+			end
+		end
+	end
 end)
-
 closebtn.MouseButton1Click:Connect(function()
-    main:Destroy()
+	main:Destroy()
 end)
-
 mini.MouseButton1Click:Connect(function()
-    up.Visible = false
-    down.Visible = false
-    flybtn.Visible = false
-    plus.Visible = false
-    speed.Visible = false
-    mine.Visible = false
-    mini.Visible = false
-    mini2.Visible = true
-    main.Frame.BackgroundTransparency = 1
-    closebtn.Position =  UDim2.new(0, 0, -1, 54)
+	up.Visible = false;
+	down.Visible = false;
+	flybtn.Visible = false;
+	plus.Visible = false;
+	speed.Visible = false;
+	mine.Visible = false;
+	mini.Visible = false;
+	mini2.Visible = true;
+	main.Frame.BackgroundTransparency = 1;
+	closebtn.Position = UDim2.new(0, 0, -1, 54)
 end)
-
 mini2.MouseButton1Click:Connect(function()
-    up.Visible = true
-    down.Visible = true
-    flybtn.Visible = true
-    plus.Visible = true
-    speed.Visible = true
-    mine.Visible = true
-    mini.Visible = true
-    mini2.Visible = false
-    main.Frame.BackgroundTransparency = 0 
-    closebtn.Position =  UDim2.new(0, 0, -1, 27)
+	up.Visible = true;
+	down.Visible = true;
+	flybtn.Visible = true;
+	plus.Visible = true;
+	speed.Visible = true;
+	mine.Visible = true;
+	mini.Visible = true;
+	mini2.Visible = false;
+	main.Frame.BackgroundTransparency = 0;
+	closebtn.Position = UDim2.new(0, 0, -1, 27)
 end)
