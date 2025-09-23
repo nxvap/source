@@ -1,5 +1,5 @@
 local success1, hui = pcall(gethui or get_hidden_ui or get_hui or gethiddenui or gethiddengui or get_hidden_gui)
-local success2, hui = pcall(game.GetService, game, "CoreGui")
+local success2, coreGui = pcall(game.GetService, game, "CoreGui")
 local main = Instance.new("ScreenGui")
 local frame = Instance.new("Frame")
 local name = Instance.new("TextLabel")
