@@ -135,11 +135,11 @@ local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
 
 nowe = false
 
-game:GetService("StarterGui"):SetCore("SendNotification", { 
-	Title = "TERBANG ID";
-	Text = "DIBUAT YOUTUBE @FarhanXYX";
-	Icon = "rbxthumb://type=Asset&id=102120801537546&w=150&h=150"})
-Duration = 5;
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "Notify";
+    Text = "Follow me for more scripts: @Roun95";
+    Icon = game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("Roun95"), Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)})
+    Duration = 10;
 
 Frame.Active = true -- main = gui
 Frame.Draggable = true
