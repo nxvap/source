@@ -496,7 +496,7 @@ mini.MouseButton1Click:Connect(function()
 	mini2.Visible = true
     noclipbtn.Visible = false
 	main.Frame.BackgroundTransparency = 1
-	closebutton.Position =  UDim2.new(0, 0, -1, 57)
+	closebutton.Position =  UDim2.new(0, 0, -1, 54)
 end)
 
 mini2.MouseButton1Click:Connect(function()
