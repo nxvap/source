@@ -139,12 +139,13 @@ noclipbtn.Position = UDim2.new(0, 90, -1, 27)
 
 local noclip = false
 local chr = game.Players.LocalPlayer.Character
+local RunService = game:GetService("RunService")
 
 local function Noclipf()
 	noclip = not noclip
 	noclipbtn.Text = noclip and "Noclip ON" or "Noclip OFF"
 	if noclip then
-		connection = game.RunService.Stepped:Connect(function()
+		connection = RunService.Stepped:Connect(function()
 			for _, part in pairs(chr:GetDescendants()) do
 				if part:IsA("BasePart") and part.CanCollide then
 					part.CanCollide = false
