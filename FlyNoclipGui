@@ -137,12 +137,13 @@ noclipbtn.TextSize = 18
 noclipbtn.Position = UDim2.new(0, 90, -1, 27)
 
 local noclip = false
+local chr = game.Players.LocalPlayer.Character
 
 local function Noclipf()
 	noclip = not noclip
 	noclipbtn.Text = noclip and "Noclip ON" or "Noclip OFF"
 	if noclip then
-		connection = RunService.Stepped:Connect(function()
+		connection = game.RunService.Stepped:Connect(function()
 			for _, part in pairs(chr:GetDescendants()) do
 				if part:IsA("BasePart") and part.CanCollide then
 					part.CanCollide = false
@@ -491,7 +492,7 @@ mini.MouseButton1Click:Connect(function()
 	mine.Visible = false
 	mini.Visible = false
 	mini2.Visible = true
-    	noclipbtn.Visible = false
+    noclipbtn.Visible = false
 	main.Frame.BackgroundTransparency = 1
 	closebutton.Position =  UDim2.new(0, 0, -1, 57)
 end)
@@ -505,7 +506,7 @@ mini2.MouseButton1Click:Connect(function()
 	mine.Visible = true
 	mini.Visible = true
 	mini2.Visible = false
-    	noclipbtn.Visible = true
+    noclipbtn.Visible = true
 	main.Frame.BackgroundTransparency = 0 
 	closebutton.Position =  UDim2.new(0, 0, -1, 27)
 end)
