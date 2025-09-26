@@ -128,7 +128,7 @@ mini2.Visible = false
 
 local noclipbtn = Instance.new("TextButton")
 noclipbtn.Name = "noclip"
-noclipbtn.Parent = main.Frame
+noclipbtn.Parent = Frame
 noclipbtn.BackgroundColor3 = Color3.fromRGB(46,49,54)
 noclipbtn.Font = "SourceSans"
 noclipbtn.Size = UDim2.new(0, 100, 0, 27)
@@ -153,6 +153,19 @@ end
 
 noclipbtn.MouseButton1Click:Connect(function()
 	setNoclip(not isNoclip)
+end)
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local rootPart = character:WaitForChild("HumanoidRootPart")
+local camera = workspace.CurrentCamera
+
+player.CharacterAdded:Connect(function(newCharacter)
+	character = newCharacter
+	humanoid = character:WaitForChild("Humanoid")
+	rootPart = character:WaitForChild("HumanoidRootPart")
+	setNoclip(false)
 end)
 
 speeds = 1
@@ -502,17 +515,4 @@ mini2.MouseButton1Click:Connect(function()
     noclipbtn.Visible = true
 	main.Frame.BackgroundTransparency = 0 
 	closebutton.Position =  UDim2.new(0, 0, -1, 27)
-end)
-
-local player = Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-local rootPart = character:WaitForChild("HumanoidRootPart")
-local camera = workspace.CurrentCamera
-
-player.CharacterAdded:Connect(function(newCharacter)
-	character = newCharacter
-	humanoid = character:WaitForChild("Humanoid")
-	rootPart = character:WaitForChild("HumanoidRootPart")
-	setNoclip(false)
 end)
