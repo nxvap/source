@@ -3,11 +3,11 @@ local Frame = Instance.new("Frame")
 local up = Instance.new("TextButton")
 local down = Instance.new("TextButton")
 local onof = Instance.new("TextButton")
-local TextLabel = Instance.new("TextLabel")
+local name = Instance.new("TextLabel")
 local plus = Instance.new("TextButton")
 local speed = Instance.new("TextLabel")
 local mine = Instance.new("TextButton")
-local closebutton = Instance.new("TextButton")
+local closebtn = Instance.new("TextButton")
 local mini = Instance.new("TextButton")
 local mini2 = Instance.new("TextButton")
 
@@ -51,15 +51,15 @@ onof.Text = "FLY"
 onof.TextColor3 = Color3.fromRGB(202,178,251)
 onof.TextSize = 14
 
-TextLabel.Parent = Frame
-TextLabel.BackgroundColor3 = Color3.fromRGB(46,49,54)
-TextLabel.Position = UDim2.new(0.475, 0, 0, 0)
-TextLabel.Size = UDim2.new(0, 100, 0, 27)
-TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "NOVA 🌠"
-TextLabel.TextColor3 = Color3.fromRGB(202,178,251)
-TextLabel.TextSize = 25
-TextLabel.TextWrapped = true
+name.Parent = Frame
+name.BackgroundColor3 = Color3.fromRGB(46,49,54)
+name.Position = UDim2.new(0.475, 0, 0, 0)
+name.Size = UDim2.new(0, 100, 0, 27)
+name.Font = Enum.Font.SourceSans
+name.Text = "NOVA 🌠"
+name.TextColor3 = Color3.fromRGB(202,178,251)
+name.TextSize = 25
+name.TextWrapped = true
 
 plus.Name = "plus"
 plus.Parent = Frame
@@ -95,15 +95,15 @@ mine.TextColor3 = Color3.fromRGB(202,178,251)
 mine.TextSize = 25
 mine.TextWrapped = true
 
-closebutton.Name = "Close"
-closebutton.Parent = main.Frame
-closebutton.BackgroundColor3 = Color3.fromRGB(54,57,62)
-closebutton.Font = "SourceSans"
-closebutton.Size = UDim2.new(0, 44, 0, 27)
-closebutton.Text = "x"
-closebutton.TextColor3 = Color3.fromRGB(202,178,251)
-closebutton.TextSize = 25
-closebutton.Position =  UDim2.new(0, 0, -1, 27)
+closebtn.Name = "Close"
+closebtn.Parent = main.Frame
+closebtn.BackgroundColor3 = Color3.fromRGB(54,57,62)
+closebtn.Font = "SourceSans"
+closebtn.Size = UDim2.new(0, 44, 0, 27)
+closebtn.Text = "x"
+closebtn.TextColor3 = Color3.fromRGB(202,178,251)
+closebtn.TextSize = 25
+closebtn.Position =  UDim2.new(0, 0, -1, 27)
 
 mini.Name = "minimize"
 mini.Parent = main.Frame
@@ -128,8 +128,7 @@ mini2.Visible = false
 
 speeds = 1
 
-local speaker = game:GetService("Players").LocalPlayer
-
+local sp= game:GetService("Players").LocalPlayer.Character.Humanoid
 local chr = game.Players.LocalPlayer.Character
 local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
 
@@ -141,40 +140,36 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Icon = game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("Roun95"), Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)})
     Duration = 10;
 
-Frame.Active = true -- main = gui
+Frame.Active = true
 Frame.Draggable = true
 
 onof.MouseButton1Down:connect(function()
 
 	if nowe == true then
 		nowe = false
-
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
-		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Running,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
+		sp:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
 	else 
 		nowe = true
-
-
 
 		for i = 1, speeds do
 			spawn(function()
 
 				local hb = game:GetService("RunService").Heartbeat	
-
 
 				tpwalking = true
 				local chr = game.Players.LocalPlayer.Character
@@ -194,30 +189,25 @@ onof.MouseButton1Down:connect(function()
 		for i,v in next, Hum:GetPlayingAnimationTracks() do
 			v:AdjustSpeed(0)
 		end
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
-		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Running,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
+		sp:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
+		sp:ChangeState(Enum.HumanoidStateType.Swimming)
 	end
 
-
-
-
 	if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
-
-
 
 		local plr = game.Players.LocalPlayer
 		local torso = plr.Character.Torso
@@ -227,7 +217,6 @@ onof.MouseButton1Down:connect(function()
 		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
 		local maxspeed = 50
 		local speed = 0
-
 
 		local bg = Instance.new("BodyGyro", torso)
 		bg.P = 9e4
@@ -273,9 +262,6 @@ onof.MouseButton1Down:connect(function()
 		game.Players.LocalPlayer.Character.Animate.Disabled = false
 		tpwalking = false
 
-
-
-
 	else
 		local plr = game.Players.LocalPlayer
 		local UpperTorso = plr.Character.UpperTorso
@@ -285,7 +271,6 @@ onof.MouseButton1Down:connect(function()
 		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
 		local maxspeed = 50
 		local speed = 0
-
 
 		local bg = Instance.new("BodyGyro", UpperTorso)
 		bg.P = 9e4
@@ -330,15 +315,7 @@ onof.MouseButton1Down:connect(function()
 		plr.Character.Humanoid.PlatformStand = false
 		game.Players.LocalPlayer.Character.Animate.Disabled = false
 		tpwalking = false
-
-
-
 	end
-
-
-
-
-
 end)
 
 local tis
@@ -385,19 +362,16 @@ game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
 
 end)
 
-
 plus.MouseButton1Down:connect(function()
 	speeds = speeds + 1
 	speed.Text = speeds
 	if nowe == true then
 
-
 		tpwalking = false
 		for i = 1, speeds do
 			spawn(function()
 
-				local hb = game:GetService("RunService").Heartbeat	
-
+				local hb = game:GetService("RunService").Heartbeat
 
 				tpwalking = true
 				local chr = game.Players.LocalPlayer.Character
@@ -427,7 +401,6 @@ mine.MouseButton1Down:connect(function()
 
 					local hb = game:GetService("RunService").Heartbeat	
 
-
 					tpwalking = true
 					local chr = game.Players.LocalPlayer.Character
 					local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
@@ -443,7 +416,7 @@ mine.MouseButton1Down:connect(function()
 	end
 end)
 
-closebutton.MouseButton1Click:Connect(function()
+closebtn.MouseButton1Click:Connect(function()
 	main:Destroy()
 end)
 
@@ -457,7 +430,7 @@ mini.MouseButton1Click:Connect(function()
 	mini.Visible = false
 	mini2.Visible = true
 	main.Frame.BackgroundTransparency = 1
-	closebutton.Position =  UDim2.new(0, 0, -1, 54)
+	closebtn.Position =  UDim2.new(0, 0, -1, 54)
 end)
 
 mini2.MouseButton1Click:Connect(function()
@@ -470,5 +443,5 @@ mini2.MouseButton1Click:Connect(function()
 	mini.Visible = true
 	mini2.Visible = false
 	main.Frame.BackgroundTransparency = 0 
-	closebutton.Position =  UDim2.new(0, 0, -1, 27)
+	closebtn.Position =  UDim2.new(0, 0, -1, 27)
 end)
