@@ -138,7 +138,7 @@ nowe = false
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "Notify";
     Text = "Follow me for more scripts: @Roun95";
-    Icon = game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("Roun95"), Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)})
+    Icon = game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("Roun95"), Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)})
     Duration = 10;
 
 Frame.Active = true -- main = gui
