@@ -30,17 +30,15 @@ SB.TextScaled = true
 SB.TextSize = 14
 SB.TextWrapped = true
 
-local HR = CH.HumanoidRootPart
-
 local bv = Instance.new("BodyVelocity")
 bv.Name = "VelocityHandler"
-bv.Parent = HR
+bv.Parent = CH.HumanoidRootPart
 bv.MaxForce = Vector3.new(0,0,0)
 bv.Velocity = Vector3.new(0,0,0)
 
 local bg = Instance.new("BodyGyro")
 bg.Name = "GyroHandler"
-bg.Parent = HR
+bg.Parent = CH.HumanoidRootPart
 bg.MaxTorque = Vector3.new(9e9,9e9,9e9)
 bg.P = 1000
 bg.D = 50
@@ -66,39 +64,39 @@ local speed = 50
 
 local Signal2
 Signal2 = game:GetService("RunService").RenderStepped:Connect(function()
-if CH and CH:FindFirstChildOfClass("Humanoid") and CH.Humanoid.RootPart and HR:FindFirstChild("VelocityHandler") and HR:FindFirstChild("GyroHandler") then
+if CH and CH:FindFirstChildOfClass("Humanoid") and CH.Humanoid.RootPart and CH.HumanoidRootPart:FindFirstChild("VelocityHandler") and CH.HumanoidRootPart:FindFirstChild("GyroHandler") then
 
 if On then
 FB.Text = "Fly: On"
 FB.BackgroundColor3 = Color3.new(0,255,0)
-HR.VelocityHandler.MaxForce = Vector3.new(9e9,9e9,9e9)
-HR.GyroHandler.MaxTorque = Vector3.new(9e9,9e9,9e9)
+CH.HumanoidRootPart.VelocityHandler.MaxForce = Vector3.new(9e9,9e9,9e9)
+CH.HumanoidRootPart.GyroHandler.MaxTorque = Vector3.new(9e9,9e9,9e9)
 CH.Humanoid.PlatformStand = true
 elseif On == false then
 FB.Text = "Fly: Off"
 FB.BackgroundColor3 = Color3.new(255,0,0)
-HR.VelocityHandler.MaxForce = Vector3.new(0,0,0)
-HR.GyroHandler.MaxTorque = Vector3.new(0,0,0)
+CH.HumanoidRootPart.VelocityHandler.MaxForce = Vector3.new(0,0,0)
+CH.HumanoidRootPart.GyroHandler.MaxTorque = Vector3.new(0,0,0)
 CH.Humanoid.PlatformStand = false
 return
 end
 
 local controlModule = require(LP.PlayerScripts:WaitForChild('PlayerModule'):WaitForChild("ControlModule"))
 
-HR.GyroHandler.CFrame = camera.CoordinateFrame
+CH.HumanoidRootPart.GyroHandler.CFrame = camera.CoordinateFrame
 local direction = controlModule:GetMoveVector()
-HR.VelocityHandler.Velocity = Vector3.new()
+CH.HumanoidRootPart.VelocityHandler.Velocity = Vector3.new()
 if direction.X > 0 then
-HR.VelocityHandler.Velocity = HR.VelocityHandler.Velocity + cam.CFrame.RightVector*(direction.X*speed)
+CH.HumanoidRootPart.VelocityHandler.Velocity = CH.HumanoidRootPart.VelocityHandler.Velocity + cam.CFrame.RightVector*(direction.X*speed)
 end
 if direction.X < 0 then
-HR.VelocityHandler.Velocity = HR.VelocityHandler.Velocity + cam.CFrame.RightVector*(direction.X*speed)
+CH.HumanoidRootPart.VelocityHandler.Velocity = CH.HumanoidRootPart.VelocityHandler.Velocity + cam.CFrame.RightVector*(direction.X*speed)
 end
 if direction.Z > 0 then
-HR.VelocityHandler.Velocity = HR.VelocityHandler.Velocity - cam.CFrame.LookVector*(direction.Z*speed)
+CH.HumanoidRootPart.VelocityHandler.Velocity = CH.HumanoidRootPart.VelocityHandler.Velocity - cam.CFrame.LookVector*(direction.Z*speed)
 end
 if direction.Z < 0 then
-HR.VelocityHandler.Velocity = HR.VelocityHandler.Velocity - cam.CFrame.LookVector*(direction.Z*speed)
+CH.HumanoidRootPart.VelocityHandler.Velocity = CH.HumanoidRootPart.VelocityHandler.Velocity - cam.CFrame.LookVector*(direction.Z*speed)
 end
 end
 end)
