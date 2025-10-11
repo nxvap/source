@@ -128,7 +128,7 @@ mini2.Visible = false
 
 local noclipbtn = Instance.new("TextButton")
 noclipbtn.Name = "noclip"
-noclipbtn.Parent = Frame
+noclipbtn.Parent = main.Frame
 noclipbtn.BackgroundColor3 = Color3.fromRGB(46,49,54)
 noclipbtn.Font = "SourceSans"
 noclipbtn.Size = UDim2.new(0, 100, 0, 27)
@@ -137,13 +137,12 @@ noclipbtn.TextColor3 = Color3.fromRGB(202,178,251)
 noclipbtn.TextSize = 18
 noclipbtn.Position = UDim2.new(0, 90, -1, 27)
 
-local isNoclip = false
+local noclip = false
 local chr = game.Players.LocalPlayer.Character
 
 local function setNoclip(state)
-	isNoclip = state
+	noclip = state
 	noclipbtn.Text = state and "Noclip ON" or "Noclip OFF"
-	noclipbtn.BackgroundColor3 = state and Color3.fromRGB(60, 100, 60) or Color3.fromRGB(50, 50, 50)
 	for _, part in pairs(chr:GetDescendants()) do
 		if part:IsA("BasePart") then
 			part.CanCollide = not state
@@ -152,20 +151,7 @@ local function setNoclip(state)
 end
 
 noclipbtn.MouseButton1Click:Connect(function()
-	setNoclip(not isNoclip)
-end)
-
-local player = Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-local rootPart = character:WaitForChild("HumanoidRootPart")
-local camera = workspace.CurrentCamera
-
-player.CharacterAdded:Connect(function(newCharacter)
-	character = newCharacter
-	humanoid = character:WaitForChild("Humanoid")
-	rootPart = character:WaitForChild("HumanoidRootPart")
-	setNoclip(false)
+	setNoclip(not noclip)
 end)
 
 speeds = 1
@@ -180,7 +166,7 @@ nowe = false
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "Notify";
     Text = "Follow me for more scripts: @Roun95";
-    Icon = game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("Roun95"), Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)})
+    Icon = game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("Roun95"), Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)})
     Duration = 10;
 
 Frame.Active = true -- main = gui
