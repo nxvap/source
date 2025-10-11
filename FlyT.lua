@@ -1,10 +1,9 @@
 local Gui = Instance.new("ScreenGui", game.CoreGui)
-local FB = Instance.new("TextButton")
-local SB = Instance.new("TextBox")
+local FB = Instance.new("TextButton", Gui)
+local SB = Instance.new("TextBox", FB)
 local Lp = game.Players.LocalPlayer
 local On = false
 
-FB.Parent = Gui
 FB.BackgroundColor3 = Color3.new(0,90,0)
 FB.BorderColor3 = Color3.new(0,0,0)
 FB.Position = UDim2.new(0.9,0,0,0)
@@ -19,12 +18,11 @@ FB.Transparency = 0.2
 FB.Active = true
 FB.Draggable = true
 
-SB.Parent = FB
 SB.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 SB.Position = UDim2.new(-1.7, 0, 0, 0)
 SB.Size = UDim2.new(0, 65, 0, 40)
 SB.Font = Enum.Font.Code
-SB.PlaceholderText = "Speed"
+SB.PlaceholderText = "500"
 SB.Text = ""
 SB.TextColor3 = Color3.fromRGB(0, 0, 0)
 SB.TextScaled = true
@@ -112,3 +110,4 @@ if tonumber(SB.Text) then
 speed = tonumber(SB.Text)
 end
 end)
+
