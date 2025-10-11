@@ -23,7 +23,7 @@ SB.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 SB.Position = UDim2.new(-1.7, 0, 0, 0)
 SB.Size = UDim2.new(0, 65, 0, 40)
 SB.Font = "SourceSans"
-SB.PlaceholderText = "50"
+SB.PlaceholderText = "500"
 SB.Text = ""
 SB.TextColor3 = Color3.fromRGB(0, 0, 0)
 SB.TextScaled = true
@@ -111,3 +111,4 @@ if tonumber(SB.Text) then
 speed = tonumber(SB.Text)
 end
 end)
+
