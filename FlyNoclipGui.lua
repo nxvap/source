@@ -143,6 +143,7 @@ local chr = game.Players.LocalPlayer.Character
 local function setNoclip(state)
 	noclip = state
 	noclipbtn.Text = state and "Noclip ON" or "Noclip OFF"
+	--noclipbtn.BackgroundColor3 = state and Color3.fromRGB(60, 100, 60) or Color3.fromRGB(50, 50, 50)
 	for _, part in pairs(chr:GetDescendants()) do
 		if part:IsA("BasePart") then
 			part.CanCollide = not state
