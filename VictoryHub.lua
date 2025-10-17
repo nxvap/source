@@ -247,134 +247,6 @@ Tab2:AddButton({
         loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
 	end
 })
-
-Tab2:AddSection({"》 ESP"})
-local espGuis = {}
-local connections = {}
-local espEnabled = false
-local selectedColor = "RGB"
-
-Tab2:AddDropdown({
-    Name = "Select color",
-    Default = "RGB",
-    Options = {
-        "RGB", "Black", "White", "Red",
-        "Green", "Blue", "Yellow", "Pink", "Purple"
-    },
-    Callback = function(value)
-        selectedColor = value
-    end
-})
-local function espColor()
-    if selectedColor == "RGB" then
-        local h = (tick() % 5) / 5
-        return Color3.fromHSV(h, 1, 1)
-    elseif selectedColor == "Black" then
-        return Color3.fromRGB(0, 0, 0)
-    elseif selectedColor == "White" then
-        return Color3.fromRGB(255, 255, 255)
-    elseif selectedColor == "Red" then
-        return Color3.fromRGB(255, 0, 0)
-    elseif selectedColor == "Green" then
-        return Color3.fromRGB(0, 255, 0)
-    elseif selectedColor == "Blue" then
-        return Color3.fromRGB(0, 170, 255)
-    elseif selectedColor == "Yellow" then
-        return Color3.fromRGB(255, 255, 0)
-    elseif selectedColor == "Pink" then
-        return Color3.fromRGB(255, 105, 180)
-    elseif selectedColor == "Purple" then
-        return Color3.fromRGB(128, 0, 128)
-    end
-    return Color3.new(1, 1, 1)
-end
-local function updateESP(player)
-    if player == LocalPlayer then return end
-    if not espEnabled then return end
-
-    if Character then
-        local head = Character:FindFirstChild("Head")
-        if head then
-            if espGuis[player] then
-                espGuis[player]:Destroy()
-            end
-
-            local espGui = Instance.new("BillboardGui")
-            espGui.Parent = head
-            espGui.Adornee = head
-            espGui.Size = UDim2.new(0,200,0,50)
-            espGui.StudsOffset = Vector3.new(0,3,0)
-            espGui.AlwaysOnTop = true
-
-            local espText = Instance.new("TextLabel")
-            espText.Parent = espGui
-            espText.Size = UDim2.new(1,0,1,0)
-            espText.BackgroundTransparency = 1
-            espText.TextStrokeTransparency = 0.5
-            espText.Font = Enum.Font.SourceSansBold
-            espText.TextSize = 14
-            espText.Text = player.Name .. " | " .. player.AccountAge .. " days"
-            espText.TextColor3 = espColor()
-            espGuis[player] = espGui
-        end
-    end
-end
-
-local function removeESP(player)
-    if espGuis[player] then
-        espGuis[player]:Destroy()
-        espGuis[player] = nil
-    end
-end
-
-local espToggle = Tab2:AddToggle({
-    Name = "Enable ESP",
-    Default = false
-})
-
-espToggle:Callback(function(value)
-    espEnabled = value
-    if espEnabled then
-        for _, player in pairs(Players:GetPlayers()) do
-            updateESP(player)
-        end
-        local updateConnection = RunService.Heartbeat:Connect(function()
-            for _, player in pairs(Players:GetPlayers()) do
-                updateESP(player)
-            end
-            if selectedColor == "RGB" then
-                for _, player in pairs(Players:GetPlayers()) do
-                    local gui = espGuis[player]
-                    if gui and gui:FindFirstChild("TextLabel") then
-                        gui.TextLabel.TextColor3 = espColor()
-                    end
-                end
-            end
-        end)
-        table.insert(connections, updateConnection)
-        local playerAdded = Players.PlayerAdded:Connect(function(player)
-            updateESP(player)
-            local charConn = player.CharacterAdded:Connect(function()
-                updateESP(player)
-            end)
-            table.insert(connections, charConn)
-        end)
-        table.insert(connections, playerAdded)
-        local playerRemoving = Players.PlayerRemoving:Connect(function(player)
-            removeESP(player)
-        end)
-        table.insert(connections, playerRemoving)
-    else
-        for _, player in pairs(Players:GetPlayers()) do
-            removeESP(player)
-        end
-        for _, conn in pairs(connections) do
-            conn:Disconnect()
-        end
-        connections = {}
-        espGuis = {}
-    end
-end)
 --------------------------------------------------
 			-- === Tab 3: Avatar === --
 --------------------------------------------------
@@ -548,52 +420,114 @@ Tab3:AddButton({
 --------------------------------------------------
 			-- === Tab 4: RGB === --
 --------------------------------------------------
-Tab4:AddSection({"》 RGB Player"})
-local rgbSpeed = 1
+Tab4:AddSection({"》 ESP"})
 
-Tab4:AddSlider({
-    Name = "Adjust RGB Speed",
-    Min = 1,
-    Max = 10,
-    Increase = 1,
-    Default = 2,
-    Callback = function(Value)
-        rgbSpeed = Value
-    end
-})
-
-local function getRainbowColor(speedMultiplier)
-    local h = (tick() * speedMultiplier % 5) / 5
-    return Color3.fromHSV(h, 1, 1)
-end
-
-local function fireServer(eventName, args)
-    local event = ReplicatedStorage.RE
-    if event and event:FindFirstChild(eventName) then
-        pcall(function()
-            event[eventName]:FireServer(unpack(args))
-        end)
-    end
-end
-
-local nameBioRGBActive = false
 Tab4:AddToggle({
-    Name = "Name and Bio RGB",
+    Name = "ESP",
     Default = false,
-    Callback = function(state)
-        nameBioRGBActive = state
-        if state then
-            task.spawn(function()
-                while nameBioRGBActive and LocalPlayer.Character do
-                    local color = getRainbowColor(rgbSpeed)
-                    fireServer("1RPNam1eColo1r", {"PickingRPNameColor", color})
-                    fireServer("1RPNam1eColo1r", {"PickingRPBioColor", color})
-                    task.wait(0.03)
+    Callback = function(Enabled)
+        local function CreateESP(Player)
+            if not Player.Character or not Player.Character:FindFirstChild("HumanoidRootPart") then return end
+
+            local Character = Player.Character
+            local HRP = Character.HumanoidRootPart
+
+            local ESP = Instance.new("BillboardGui")
+            ESP.Name = "ESP_" .. Player.Name
+            ESP.Adornee = HRP
+            ESP.Size = UDim2.new(0, 100, 0, 50)
+            ESP.StudsOffset = Vector3.new(0, 2.5, 0)
+            ESP.AlwaysOnTop = true
+            ESP.Parent = HRP
+
+            local NameLabel = Instance.new("TextLabel")
+            NameLabel.Name = "NameLabel"
+            NameLabel.Text = Player.Name
+            NameLabel.TextColor3 = Color3.new(1, 1, 1)
+            NameLabel.BackgroundTransparency = 1
+            NameLabel.Size = UDim2.new(1, 0, 0, 20)
+            NameLabel.Parent = ESP
+
+            local DistanceLabel = Instance.new("TextLabel")
+            DistanceLabel.Name = "DistanceLabel"
+            DistanceLabel.TextColor3 = Color3.new(1, 1, 1)
+            DistanceLabel.BackgroundTransparency = 1
+            DistanceLabel.Size = UDim2.new(1, 0, 0, 20)
+            DistanceLabel.Position = UDim2.new(0, 0, 0, 40)
+            DistanceLabel.Parent = ESP
+
+            game:GetService("RunService").Heartbeat:Connect(function()
+                if not HRP or not ESP.Parent then return end
+                local LocalPlayer = game:GetService("Players").LocalPlayer
+                if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    local Distance = (HRP.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                    DistanceLabel.Text = string.format("%.1f studs", Distance)
                 end
+            end)
+        end
+
+        for _, Player in pairs(game:GetService("Players"):GetPlayers()) do
+            if Player ~= game:GetService("Players").LocalPlayer and Player.Character then
+                local HRP = Player.Character:FindFirstChild("HumanoidRootPart")
+                if HRP then
+                    local OldESP = HRP:FindFirstChild("ESP_" .. Player.Name)
+                    if OldESP then
+                        OldESP:Destroy()
+                    end
+                end
+            end
+        end
+
+        if Enabled then
+            for _, Player in pairs(game:GetService("Players"):GetPlayers()) do
+                if Player ~= game:GetService("Players").LocalPlayer then
+                    Player.CharacterAdded:Connect(function()
+                        CreateESP(Player)
+                    end)
+                    if Player.Character then
+                        CreateESP(Player)
+                    end
+                end
+            end
+
+            game:GetService("Players").PlayerAdded:Connect(function(Player)
+                Player.CharacterAdded:Connect(function()
+                    CreateESP(Player)
+                end)
             end)
         end
     end
 })
+
+Tab4:AddSection({"》 RGB Player"})
+
+local nameColor = false
+
+Tab4:AddToggle({
+    Name = "Name RGB",
+    Default = false,
+    Callback = function(value)
+        nameColor = value
+    end
+})
+	
+local putColors = {
+    Color3.fromRGB(0, 0, 0), -- Black
+    Color3.fromRGB(255, 255, 255), -- White
+    Color3.fromRGB(255, 0, 0), -- Red
+    Color3.fromRGB(0, 255, 0), -- Green
+    Color3.fromRGB(0, 0, 255) -- Blue
+}
+
+spawn(function()
+    while true do
+        if nameColor then
+            local randomColor = putColors[math.random(#putColors)]
+            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", randomColor)
+        end
+        wait(0.7)
+    end
+end)
 --------------------------------------------------
 			-- === Tab 5: House === --
 --------------------------------------------------
@@ -686,4 +620,4 @@ end
 --------------------------------------------------
 			-- === Tab 11: Graphics === --
 --------------------------------------------------
--- By @Roun95
+-- By @Roun95 (This isn't actually the real code, lol)
