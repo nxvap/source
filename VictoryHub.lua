@@ -5,14 +5,14 @@ local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitFor
 
 local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/Library-ui/refs/heads/main/Redzhubui"))()
 local Window = Lib:MakeWindow({
-    Title = "Victory Hub Source | Brookhaven RP 🌠 ",
-    SubTitle = " by Roun95",
+    Title = "Victory Hub | Brookhaven RP 🌠 ",
+    SubTitle = "by Roun95",
     SaveFolder = "VictoryData"
 })
 
 Window:AddMinimizeButton({
-    Button = {Image = "rbxassetid://ID", BackgroundTransparency = 0},
-    Corner = {CornerRadius = UDim.new(1,1)},
+    Button = { Image = "rbxassetid://ID", BackgroundTransparency = 0 },
+    Corner =  CornerRadius = UDim.new(1,1) },
 })
 
 local Tab1 = Window:MakeTab({"Info", "info"})
@@ -513,10 +513,10 @@ Tab4:AddToggle({
 	
 local putColors = {
     Color3.fromRGB(0, 0, 0), -- Black
-    Color3.fromRGB(255, 255, 255), -- White
-    Color3.fromRGB(255, 0, 0), -- Red
-    Color3.fromRGB(0, 255, 0), -- Green
-    Color3.fromRGB(0, 0, 255) -- Blue
+    Color3.fromRGB(1, 1, 1), -- White
+    Color3.fromRGB(1, 0, 0), -- Red
+    Color3.fromRGB(0, 1, 0), -- Green
+    Color3.fromRGB(0, 0, 1) -- Blue
 }
 
 spawn(function()
@@ -525,7 +525,7 @@ spawn(function()
             local randomColor = putColors[math.random(#putColors)]
             ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", randomColor)
         end
-        wait(0.7)
+        wait(0.6)
     end
 end)
 --------------------------------------------------
@@ -620,4 +620,4 @@ end
 --------------------------------------------------
 			-- === Tab 11: Graphics === --
 --------------------------------------------------
--- By @Roun95 (This isn't actually the real code, lol)
+-- By @Roun95 (This isn't actually the real code)
