@@ -11,8 +11,8 @@ local Window = Lib:MakeWindow({
 })
 
 Window:AddMinimizeButton({
-    Button = { Image = "rbxassetid://ID", BackgroundTransparency = 0 },
-    Corner =  CornerRadius = UDim.new(1,1) },
+    Button = { Image = "rbxassetid://ID" },
+    Corner = { CornerRadius = UDim.new(1,1) },
 })
 
 local Tab1 = Window:MakeTab({"Info", "info"})
